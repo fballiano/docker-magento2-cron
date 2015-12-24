@@ -1,8 +1,11 @@
 FROM fballiano/magento2-apache-php
 MAINTAINER Fabrizio Balliano <fabrizio@fabrizioballiano.com>
 
-RUN apt-get update && apt-get install -y cron rsyslog && apt-get clean
-ADD crontab /var/spool/cron/crontabs/www-data
+ADD crontab /crontab.www-data
+ADD start.sh /start.sh
 
-ENTRYPOINT cron -f
-CMD []
+RUN apt-get update && apt-get install -y cron rsyslog && apt-get clean;
+RUN chmod +x /start.sh
+RUN crontab -u www-data /crontab.www-data
+
+CMD ["/bin/bash", "/start.sh"]
