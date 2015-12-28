@@ -7,8 +7,7 @@ ADD https://raw.githubusercontent.com/nexcess/magento-turpentine/master/app/code
 ADD updatenodes.php /updatenodes.php
 
 RUN apt-get update && apt-get install -y cron rsyslog && apt-get clean
-RUN chmod +x /start.sh
 RUN crontab -u www-data /crontab.www-data
-RUN touch /var/log/syslog; touch /var/log/cron.log
+RUN chmod +x /start.sh; chmod +r /varnish.php; touch /var/log/syslog; touch /var/log/cron.log
 
 CMD "/start.sh"
