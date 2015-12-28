@@ -38,7 +38,7 @@ if ($vcl["code"] == Nexcessnet_Turpentine_Model_Varnish_Admin_Socket::CODE_OK) {
       $hosts_to_add_to_vcl .= "\tcluster1.add_backend($name);\n";
     }
     $hosts_to_add_to_vcl .= "}\n";
-    $hosts_to_add_to_vcl .= "sub vcl_recv {set req.backend_hint = tcluster1.backend();}\n";
+    $hosts_to_add_to_vcl .= "sub vcl_recv {set req.backend_hint = cluster1.backend();}\n";
   }
 
   $new_vcl = "";
