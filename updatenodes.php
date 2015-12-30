@@ -7,7 +7,7 @@ class Mage {
 }
 
 require "/credis.php";
-$redis = new Credis_Client("redis", 6379, null, null, 15);
+$redis = new Credis_Client("redis-clusterdata");
 
 require "/varnish.php";
 $varnish = new Nexcessnet_Turpentine_Model_Varnish_Admin_Socket(array(
