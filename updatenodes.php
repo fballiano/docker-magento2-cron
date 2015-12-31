@@ -37,7 +37,7 @@ ksort($apaches);
 
 $hosts_to_add_to_vcl = "";
 foreach ($apaches as $name=>$ip) {
-  $hosts_to_add_to_vcl .= "backend $name {\n\t.host = \"$ip\";\n\t.port = \"80\";\n\t.probe = {.url = \"/pub/media/styles.css\";.timeout = 1s;.interval = 3s;.window = 3;.threshold = 3;}\n}\n";
+  $hosts_to_add_to_vcl .= "backend $name {\n\t.host = \"$ip\";\n\t.port = \"80\";\n\t.probe = {.url = \"/pub/media/styles.css\";.timeout = 1s;.interval = 5s;.window = 1;.threshold = 1;}\n}\n";
 }
 
 $hosts_to_add_to_vcl .= "sub vcl_init {\n\tnew cluster1 = directors.round_robin();\n";
