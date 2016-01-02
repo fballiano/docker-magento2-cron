@@ -1,5 +1,8 @@
 <?php
 
+$probe_file = "/pub/media/styles.css";
+if (!file_exists("/var/www/html{$probe_file}")) $probe_file = "/pub/get.php";
+
 class Mage {
   public static function throwException($msg) {
     die($msg);
@@ -7,7 +10,7 @@ class Mage {
 }
 
 require "/credis.php";
-$redis = new Credis_Client("redis_clusterdata");
+$redis = new Credis_Client("clusterdata");
 
 require "/varnish.php";
 $varnish = new Nexcessnet_Turpentine_Model_Varnish_Admin_Socket(array(
@@ -37,7 +40,7 @@ ksort($apaches);
 
 $hosts_to_add_to_vcl = "";
 foreach ($apaches as $name=>$ip) {
-  $hosts_to_add_to_vcl .= "backend $name {\n\t.host = \"$ip\";\n\t.port = \"80\";\n\t.probe = {.url = \"/pub/media/styles.css\";.timeout = 1s;.interval = 5s;.window = 1;.threshold = 1;}\n}\n";
+  $hosts_to_add_to_vcl .= "backend $name {\n\t.host = \"$ip\";\n\t.port = \"80\";\n\t.probe = {.url = \"{$probe_files}\";.timeout = 1s;.interval = 5s;.window = 1;.threshold = 1;}\n}\n";
 }
 
 $hosts_to_add_to_vcl .= "sub vcl_init {\n\tnew cluster1 = directors.round_robin();\n";
