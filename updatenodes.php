@@ -1,7 +1,6 @@
 <?php
 
-$probe_file = "/pub/media/styles.css";
-if (!file_exists("/var/www/html{$probe_file}")) $probe_file = "/pub/static/adminhtml/Magento/backend/en_US/images/magento-logo.svg";
+$probe_file = "/fb_host_probe.txt";
 
 class Mage {
   public static function throwException($msg) {
