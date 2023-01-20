@@ -1,4 +1,4 @@
-FROM fballiano/magento2-apache-php:M2.4
+FROM fballiano/magento2-apache-php:M2.4.5
 MAINTAINER Fabrizio Balliano <fabrizio@fabrizioballiano.com>
 
 ADD crontab /crontab.www-data
